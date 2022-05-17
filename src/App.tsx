@@ -1,23 +1,15 @@
-import logo from "images/logo.svg";
+import Header from "components/Header";
+import { useContext } from "react";
+import { ThemeContext } from "context/ThemeContext";
 import "./App.css";
+import clsx from "clsx";
 
 function App() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={clsx("App", theme === "dark" && "bg-slate-800")}>
+      <Header />
+      <button onClick={toggleTheme}>Toggle Theme</button>
     </div>
   );
 }
