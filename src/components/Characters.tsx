@@ -6,9 +6,13 @@ type Props = {
 };
 
 function Characters(props: Props) {
-  return props.characters.map((character) => (
-    <CharacterCard character={character} key={character.id} />
-  ));
+  return (
+    <div>
+      {props.characters.map((character) => (
+        <CharacterCard character={character} key={character.id} />
+      ))}
+    </div>
+  );
 }
 
 export default withPropsValidator(Characters, "characters");

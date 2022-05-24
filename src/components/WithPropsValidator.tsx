@@ -1,7 +1,8 @@
+import React from "react";
 import Error from "./Error";
 
 export default function withPropsValidator<T extends Record<string, any>>(
-  Component: any,
+  Component: React.ComponentType<T>,
   dataKey: string
 ) {
   return function (props: T) {
