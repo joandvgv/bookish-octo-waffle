@@ -7,7 +7,7 @@ type Props = {
 
 function Characters(props: Props) {
   return (
-    <div>
+    <div className="grid grid-cols-4 gap-6">
       {props.characters.map((character) => (
         <CharacterCard character={character} key={character.id} />
       ))}

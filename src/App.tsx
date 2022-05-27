@@ -1,13 +1,17 @@
-import Header from "components/Header";
 import { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "context/ThemeContext";
+import { Theme, ThemeContext } from "context/ThemeContext";
 import "./App.css";
 import clsx from "clsx";
 import { getCharacters } from "./api/getCharacters";
 import Characters from "components/Characters";
+import withTheme from "components/withTheme";
 
-function App() {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+type Props = {
+  theme?: Theme;
+};
+
+function App(props: Props) {
+  const { toggleTheme } = useContext(ThemeContext);
   const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
@@ -17,8 +21,7 @@ function App() {
   }, []);
 
   return (
-    <div className={clsx("App", theme === "dark" && "bg-slate-800")}>
-      <Header />
+    <div className={clsx("App", "min-h-screen", props.theme)}>
       <button onClick={toggleTheme}>Toggle Theme</button>
       <Characters characters={characters} />
       {/* <Characters characters={characters} /> */}
@@ -26,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default withTheme(App, { background: true });
