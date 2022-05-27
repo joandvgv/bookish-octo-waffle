@@ -5,6 +5,8 @@ import clsx from "clsx";
 import { getCharacters } from "./api/getCharacters";
 import Characters from "components/Characters";
 import withTheme from "components/withTheme";
+import Typography from "components/Typography";
+import { useApi } from "./hooks/useApi";
 
 type Props = {
   theme?: Theme;
@@ -12,18 +14,16 @@ type Props = {
 
 function App(props: Props) {
   const { toggleTheme } = useContext(ThemeContext);
-  const [characters, setCharacters] = useState([]);
 
-  useEffect(() => {
-    getCharacters().then((value) => {
-      setCharacters(value);
-    });
-  }, []);
+  const ENDPOINT = "https://rickandmortyapi.com/api/character";
+  const { data: characters, loading, error } = useApi<Array<any>>(ENDPOINT);
 
   return (
     <div className={clsx("App", "min-h-screen", props.theme)}>
       <button onClick={toggleTheme}>Toggle Theme</button>
-      <Characters characters={characters} />
+      {loading && <Typography.H1>Loading...</Typography.H1>}
+      {error && <Typography.H1>Oh! Snap🤦‍♀️ La app se rompió 😜</Typography.H1>}
+      <Characters characters={characters ?? []} />
       {/* <Characters characters={characters} /> */}
     </div>
   );
