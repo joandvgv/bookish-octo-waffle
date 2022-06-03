@@ -6,10 +6,10 @@ import withTheme from "components/withTheme";
 
 type Props = {
   character: Record<string, any>;
-  theme?: Theme;
   invertedTheme?: Theme;
 };
-function CharacterCard({ character, theme, invertedTheme }: Props) {
+
+function CharacterCard({ character, invertedTheme }: Props) {
   return (
     <div
       className={clsx(

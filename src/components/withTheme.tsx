@@ -1,17 +1,11 @@
-import { Theme, ThemeContext } from "context/ThemeContext";
-import React, { ReactNode, useContext } from "react";
-
-type Props = {
-  children?: ReactNode;
-  theme?: Theme;
-  className?: string;
-};
+import { ThemeContext } from "context/ThemeContext";
+import React, { useContext } from "react";
 
 type Options = {
   background?: boolean;
 };
 
-export default function withTheme<T extends Props>(
+export default function withTheme<T extends Record<string, unknown>>(
   Component: React.ComponentType<T>,
   options: Options = {
     background: false,

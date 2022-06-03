@@ -9,7 +9,7 @@ import Typography from "components/Typography";
 import { useApi } from "./hooks/useApi";
 
 type Props = {
-  theme?: Theme;
+  themeClassName?: Theme;
 };
 
 function App(props: Props) {
@@ -19,7 +19,7 @@ function App(props: Props) {
   const { data: characters, loading, error } = useApi<Array<any>>(ENDPOINT);
 
   return (
-    <div className={clsx("App", "min-h-screen", props.theme)}>
+    <div className={clsx("App", "min-h-screen", props.themeClassName)}>
       <button onClick={toggleTheme}>Toggle Theme</button>
       {loading && <Typography.H1>Loading...</Typography.H1>}
       {error && <Typography.H1>Oh! Snap🤦‍♀️ La app se rompió 😜</Typography.H1>}
