@@ -3,13 +3,17 @@ import Pill from "components/Pill";
 import clsx from "clsx";
 import { Theme } from "context/ThemeContext";
 import withTheme from "components/withTheme";
+import { useStyles } from "./styles";
 
 type Props = {
   character: Record<string, any>;
   invertedTheme?: Theme;
+  boldTitles?: boolean;
 };
 
-function CharacterCard({ character, invertedTheme }: Props) {
+function CharacterCard({ character, invertedTheme, boldTitles }: Props) {
+  const styles = useStyles({ boldTitles });
+
   return (
     <div
       className={clsx(
@@ -24,7 +28,10 @@ function CharacterCard({ character, invertedTheme }: Props) {
       )}
     >
       <div>
-        <Typography.H1 inverted>Nombre: {character.name}</Typography.H1>
+        <Typography.H1 inverted>
+          <span className={styles.nosotrsDefinimosEsteNombre}>Nombre:</span>
+          {character.name}
+        </Typography.H1>
         <Typography.Body inverted>
           Estado: <Pill>{character.status}</Pill>
         </Typography.Body>
