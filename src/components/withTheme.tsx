@@ -1,5 +1,6 @@
 import { ThemeContext } from "context/ThemeContext";
 import React, { useContext } from "react";
+import { css } from "styled-components";
 
 type Options = {
   background?: boolean;
@@ -19,11 +20,34 @@ export default function withTheme<T extends Record<string, unknown>>(
       light: options.background ? "bg-slate-800" : "text-white",
     };
 
+    const cssMap = {
+      dark: options.background ? "white" : "dark",
+      light: options.background ? "dark" : "white",
+    };
+
+    // const cssMap = {
+    //   dark: options.background
+    //     ? css`
+    //         background-color: white;
+    //       `
+    //     : css`
+    //         color: black;
+    //       `,
+    //   light: options.background
+    //     ? css`
+    //         background-color: black;
+    //       `
+    //     : css`
+    //         color: white;
+    //       `,
+    // };
+
     return (
       <Component
         {...props}
         themeClassName={classMap[theme]}
         invertedTheme={classMap[invertedTheme]}
+        cssTheme={cssMap[theme]}
       />
     );
   };

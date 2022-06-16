@@ -2,30 +2,32 @@ import clsx from "clsx";
 import withTheme from "components/withTheme";
 import { Theme } from "context/ThemeContext";
 import { ReactNode } from "react";
+import styled, { FlattenSimpleInterpolation } from "styled-components";
+
+const PillContainer = styled.span<{
+  theme: string;
+}>`
+  display: inline-block;
+  border-radius: 9999px;
+  background: #8b5cf6;
+  padding: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  margin-right: 0.75rem;
+  font-weight: bold;
+
+  color: ${(props) => props.theme};
+  /* ${(props) => props.theme} */
+`;
 
 type Props = {
   children: ReactNode;
-  theme?: Theme;
+  // cssTheme?: FlattenSimpleInterpolation;}
+  cssTheme?: string;
 };
 
 function Pill(props: Props) {
-  return (
-    <span
-      className={clsx(
-        "inline-block",
-        "rounded-full",
-        "bg-purple-500",
-        "px-2",
-        "py-1",
-        "text-xs",
-        "font-bold",
-        "mr-3",
-        props.theme
-      )}
-    >
-      {props.children}
-    </span>
-  );
+  return <PillContainer theme={props.cssTheme}>{props.children}</PillContainer>;
 }
 
 export default withTheme(Pill);
