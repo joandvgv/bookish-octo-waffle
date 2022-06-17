@@ -1,8 +1,7 @@
-import clsx from "clsx";
 import withTheme from "components/withTheme";
-import { Theme } from "context/ThemeContext";
+
 import { ReactNode } from "react";
-import styled, { FlattenSimpleInterpolation } from "styled-components";
+import styled from "styled-components";
 
 const PillContainer = styled.span<{
   theme: string;

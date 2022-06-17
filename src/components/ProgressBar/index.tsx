@@ -1,5 +1,4 @@
-import clsx from "clsx";
-
+import styled from "styled-components";
 const WIDTH_BASE = 12;
 
 type Props = {
@@ -7,16 +6,24 @@ type Props = {
   progress: number;
 };
 
+const BarContainer = styled.div`
+  width: 100%;
+  height: 0.375rem;
+  background-color: ${(props) => props.color + "4D"};
+`;
+
+const FillBar = styled.div<{
+  progress: Props["progress"];
+}>`
+  background-color: ${(props) => props.color};
+  height: 0.375rem;
+  width: ${(props) => `${(props.progress / WIDTH_BASE) * 100}%`};
+`;
+
 export default function ProgressBar(props: Props) {
   return (
-    <div className={clsx(props.color, "w-full", "bg-opacity-30", "h-1.5")}>
-      <div
-        className={clsx(
-          props.color,
-          "h-1.5",
-          `w-${props.progress}/${WIDTH_BASE}`
-        )}
-      ></div>
-    </div>
+    <BarContainer color={props.color}>
+      <FillBar color={props.color} progress={props.progress} />
+    </BarContainer>
   );
 }

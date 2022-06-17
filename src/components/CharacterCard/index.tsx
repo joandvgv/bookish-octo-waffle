@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { Theme } from "context/ThemeContext";
 import withTheme from "components/withTheme";
 import { useStyles } from "./styles";
+import ProgressBar from "components/ProgressBar";
 
 type Props = {
   character: Record<string, any>;
@@ -27,6 +28,7 @@ function CharacterCard({ character, invertedTheme, boldTitles }: Props) {
         invertedTheme
       )}
     >
+      <ProgressBar progress={10} color="#55b4b0" />
       <div>
         <Typography.H1 inverted>
           <span className={styles.nosotrsDefinimosEsteNombre}>Nombre:</span>
