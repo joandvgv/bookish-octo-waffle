@@ -1,17 +1,32 @@
-import Header from "components/Header";
-import { useContext } from "react";
-import { ThemeContext } from "context/ThemeContext";
+import { useContext, useEffect, useState } from "react";
+import { Theme, ThemeContext } from "context/ThemeContext";
 import "./App.css";
 import clsx from "clsx";
+import { getCharacters } from "./api/getCharacters";
+import Characters from "components/Characters";
+import withTheme from "components/withTheme";
+import Typography from "components/Typography";
+import { useApi } from "./hooks/useApi";
 
-function App() {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+type Props = {
+  themeClassName?: Theme;
+};
+
+function App(props: Props) {
+  const { toggleTheme } = useContext(ThemeContext);
+
+  const ENDPOINT = "https://rickandmortyapi.com/api/character";
+  const { data: characters, loading, error } = useApi<Array<any>>(ENDPOINT);
+
   return (
-    <div className={clsx("App", theme === "dark" && "bg-slate-800")}>
-      <Header />
+    <div className={clsx("App", "min-h-screen", props.themeClassName)}>
       <button onClick={toggleTheme}>Toggle Theme</button>
+      {loading && <Typography.H1>Loading...</Typography.H1>}
+      {error && <Typography.H1>Oh! Snap🤦‍♀️ La app se rompió 😜</Typography.H1>}
+      <Characters characters={characters ?? []} />
+      {/* <Characters characters={characters} /> */}
     </div>
   );
 }
 
-export default App;
+export default withTheme(App, { background: true });

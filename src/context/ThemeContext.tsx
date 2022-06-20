@@ -1,15 +1,17 @@
 import { createContext, ReactNode, useState } from "react";
 
-type Theme = "dark" | "light";
+export type Theme = "dark" | "light";
 
 const DEFAULT_THEME: Theme = "dark";
 
 export const ThemeContext = createContext<{
   theme: Theme;
+  invertedTheme: Theme;
   toggleTheme: () => void;
 }>({
   theme: DEFAULT_THEME,
   toggleTheme: () => ({}),
+  invertedTheme: DEFAULT_THEME,
 });
 
 type Props = {
@@ -18,12 +20,16 @@ type Props = {
 
 export default function ThemeContextProvider(props: Props) {
   const [theme, setTheme] = useState(DEFAULT_THEME);
+
+  const invertTheme = (value: Theme) => (value === "dark" ? "light" : "dark");
+  const invertedTheme = invertTheme(theme);
+
   const toggleTheme = () => {
-    setTheme((value) => (value === "dark" ? "light" : "dark"));
+    setTheme(invertTheme);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, invertedTheme }}>
       {props.children}
     </ThemeContext.Provider>
   );
