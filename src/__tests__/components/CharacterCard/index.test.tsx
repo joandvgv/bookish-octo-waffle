@@ -6,16 +6,27 @@ import '@testing-library/jest-dom'
 
 describe("CharacterCard", () => {
 
-  const character = {
+
+  type Character =  {name: string, status: string}
+  let character: Character = {} as Character;
+
+  beforeAll(() => {
+    character = {
       name: randFullName(),
       status: randStatus()
     }
-  render(<CharacterCard character={character} />)
+    render(<CharacterCard character={character} />)
+  });
+  
+  
 
-  it("should display character name", () => {
+  it("should display character name with default theme|", () => {
     const headerTag = screen.getByText(character.name);
-    expect(headerTag).toBeInTheDocument();
 
-  })
+    expect(headerTag).toBeInTheDocument();
+    expect(headerTag.classList.contains("text-slate-800")).toBe(true)
+  });
+
+  
 
 })
