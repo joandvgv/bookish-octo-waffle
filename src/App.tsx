@@ -19,7 +19,12 @@ function App(props: Props) {
   const { data: characters, loading, error } = useApi<Array<any>>(ENDPOINT);
 
   return (
-    <div className={clsx("App", "min-h-screen", props.themeClassName)}>
+    <div
+      data-testid="container"
+      className={clsx("App", "min-h-screen", props.themeClassName)}
+    >
+      <div className="min-h-screen">hola</div>
+
       <button onClick={toggleTheme}>Toggle Theme</button>
       {loading && <Typography.H1>Loading...</Typography.H1>}
       {error && <Typography.H1>Oh! Snap🤦‍♀️ La app se rompió 😜</Typography.H1>}
