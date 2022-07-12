@@ -15,6 +15,10 @@ const books = [
     title: "Padre Rico Padre Pobre",
     author: "Robert Kiyosaki",
   },
+  {
+    title: "El bosón de Higgs",
+    author: "Javier Santaolalla",
+  },
 ];
 
 export const resolvers = {
