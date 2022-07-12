@@ -1,4 +1,4 @@
-import { Hpta } from "./styles";
+import { BookTitle, StyledBook } from "./styles";
 
 export interface IBook {
   title: string;
@@ -7,10 +7,10 @@ export interface IBook {
 
 const Book = ({title, author}: IBook) => {
   return (
-    <div>
-      <Hpta>El título del libro es: {title}</Hpta>
+    <StyledBook>
+      <BookTitle>El título del libro es: {title}</BookTitle>
       <div>Y su autor es: {author}</div>
-    </div>
+    </StyledBook>
   );
 };
 

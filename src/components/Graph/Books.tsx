@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import Book, { IBook } from "./Book";
+import { StyledBooks } from "./styles";
 import { GET_BOOKS } from "./utils";
 const Books = () => {
   const { loading, error, data } = useQuery(GET_BOOKS);
@@ -7,11 +8,11 @@ const Books = () => {
   if (error) return <p>Error troste</p>;
 
   return (
-    <div>
+    <StyledBooks>
       {data.books.map(({ title, author }: IBook) => (
         <Book key={title} title={title} author={author} />
       ))}
-    </div>
+    </StyledBooks>
   );
 };
 
