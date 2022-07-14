@@ -1,14 +1,22 @@
+import "reflect-metadata";
 import { ApolloServer } from "apollo-server";
-import { resolvers } from "./resolvers";
-import { typeDefs } from "./schema";
+import { buildSchema } from "type-graphql";
+import { BookResolver } from "./resolvers/book.resolver";
 
-const server = new ApolloServer({
-  typeDefs, // schema
-  resolvers, // resolvers
-  csrfPrevention: true,
-  cache: "bounded",
-});
+async function runServer() {
+  const schema = await buildSchema({
+    resolvers: [BookResolver],
+    emitSchemaFile: true,
+  });
 
-server.listen().then(({ url }) => {
+  const server = new ApolloServer({
+    schema,
+    csrfPrevention: true,
+    cache: "bounded",
+  });
+
+  const { url } = await server.listen(4000);
   console.log("Server is ready at", url);
-});
+}
+
+runServer();
